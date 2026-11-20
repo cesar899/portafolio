@@ -35,6 +35,6 @@ Si prefieres crearlo como **Web Service** (Node.js):
 ---
 
 ## 📬 Contacto
-- **Email:** monevideocesar599@gmail.com
+- **Email:** montevideocesar599@gmail.com
 - **WhatsApp:** +58 424-3561272
 - **LinkedIn:** [cesar-montevideo](https://linkedin.com/in/cesar-montevideo-619456204)
