@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>César Montevideo | Full-Stack Developer & Fintech Architect</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              DEFAULT: '#00ff88',
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              neon: '#00ff88',
+              dark: '#030705'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #040608;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    /* Radial Neon Glows */
+    .neon-glow {
+      box-shadow: 0 0 50px -10px rgba(0, 255, 136, 0.35);
+    }
+    .neon-glow-btn {
+      box-shadow: 0 0 25px 0px rgba(0, 255, 136, 0.45);
+    }
+    .neon-text-glow {
+      text-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+    }
+
+    /* Glassmorphism */
+    .glass-panel {
+      background: rgba(10, 15, 22, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .glass-panel:hover {
+      border-color: rgba(0, 255, 136, 0.3);
+    }
+
+    /* Floating Keyframes */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes float-reverse {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(10px); }
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.6; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.6; }
+    }
+
+    .animate-floating {
+      animation: float 4s ease-in-out infinite;
+    }
+    .animate-floating-rev {
+      animation: float-reverse 5s ease-in-out infinite;
+    }
+    .animate-pulse-ring {
+      animation: pulse-ring 3.5s ease-in-out infinite;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #040608;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ff88;
+    }
+  </style>
+</head>
+<body class="selection:bg-cyber-neon selection:text-black font-sans">
+
+  <!-- Background Ambient Glow Elements -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-cyber-neon/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-0 right-0 w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-nav">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+      <nav class="glass-panel px-5 py-3 rounded-2xl flex items-center justify-between border border-white/10 shadow-2xl">
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-2 group">
+          <span class="w-3 h-3 rounded-full bg-cyber-neon shadow-[0_0_12px_#00ff88] group-hover:scale-125 transition-transform"></span>
+          <span class="font-bold text-white text-base tracking-wide">
+            Cesar<span class="text-cyber-neon">.dev</span>
+          </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-300">
+          <a href="#hero" class="hover:text-cyber-neon transition-colors">Inicio</a>
+          <a href="#skills" class="hover:text-cyber-neon transition-colors">Habilidades</a>
+          <a href="#experience" class="hover:text-cyber-neon transition-colors">Experiencia</a>
+          <a href="#projects" class="hover:text-cyber-neon transition-colors">Proyectos</a>
+          <a href="#simulator" class="hover:text-cyber-neon transition-colors">Simulador</a>
+          <a href="#contact" class="hover:text-cyber-neon transition-colors">Contacto</a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+          <a href="#contact" class="hidden sm:inline-flex items-center text-xs font-semibold px-4 py-2 rounded-xl text-slate-300 hover:text-white border border-slate-700 hover:border-cyber-neon/50 transition-all">
+            Hablemos
+          </a>
+          <a href="mailto:monevideocesar599@gmail.com" class="bg-cyber-neon hover:bg-[#00e67a] text-black font-extrabold text-xs px-4 py-2 rounded-xl transition-all neon-glow-btn flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span>Descargar CV</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section id="hero" class="min-h-screen pt-32 pb-20 flex items-center relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <!-- Availability Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyber-neon/10 border border-cyber-neon/30 text-cyber-neon text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-cyber-neon animate-ping"></span>
+            Disponible para Trabajo Remoto Internacional
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+            Full-Stack <br>
+            <span class="text-cyber-neon neon-text-glow">Developer</span> & <br>
+            <span class="text-slate-200">Fintech Architect</span>
+          </h1>
+
+          <!-- Value Proposition -->
+          <p class="text-base text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+            Especializado en arquitecturas transaccionales de alto rendimiento con 
+            <strong class="text-white">Laravel 13</strong>, <strong class="text-white">Filament PHP v5</strong> y <strong class="text-white">Livewire 4</strong>. 
+            Integración de pasarelas de pago globales, infraestructura cloud en AWS S3 / Cloudways y aceleración con Inteligencia Artificial.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#contact" class="bg-cyber-neon hover:bg-[#00e67a] text-black font-extrabold text-sm px-6 py-3.5 rounded-xl transition-all neon-glow-btn flex items-center gap-2">
+              <span>Hablemos de Trabajo</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+            
+            <a href="#projects" class="glass-panel text-white hover:text-cyber-neon border border-slate-700 hover:border-cyber-neon/50 font-bold text-sm px-6 py-3.5 rounded-xl transition-all flex items-center gap-2">
+              <span>Ver Proyectos</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </a>
+          </div>
+
+          <!-- Quick Metrics Bar -->
+          <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
+            <div>
+              <div class="text-2xl font-black text-white font-mono">+4 <span class="text-cyber-neon">Años</span></div>
+              <div class="text-xs text-slate-400 mt-0.5">Experiencia Full-Stack</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-white font-mono">100%</div>
+              <div class="text-xs text-slate-400 mt-0.5">Remoto Global</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-white font-mono">0 <span class="text-cyber-neon">ms</span></div>
+              <div class="text-xs text-slate-400 mt-0.5">Fricción en Pagos</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Avatar with Cyber Halo & Orbiting Badges -->
+        <div class="lg:col-span-5 flex justify-center relative">
+          
+          <!-- Outer Pulsing Glow Aura -->
+          <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full p-2 bg-gradient-to-tr from-cyber-neon via-emerald-400 to-cyber-neon/20 shadow-[0_0_70px_rgba(0,255,136,0.35)] relative flex items-center justify-center animate-pulse-ring">
+            
+            <!-- Dark Inner Background Container -->
+            <div class="w-full h-full rounded-full bg-[#050806] overflow-hidden border-2 border-black flex items-center justify-center relative shadow-inner">
+              
+              <!-- Graphic Avatar Representation -->
+              <div class="w-full h-full bg-gradient-to-b from-slate-900 via-[#070e0a] to-[#040608] flex flex-col items-center justify-center p-6 text-center">
+                <!-- Inner Glow Ring -->
+                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-cyber-neon/15 border border-cyber-neon/40 flex items-center justify-center text-3xl sm:text-4xl font-black text-cyber-neon shadow-[0_0_30px_rgba(0,255,136,0.3)] mb-3">
+                  CM
+                </div>
+                <h3 class="text-base sm:text-lg font-extrabold text-white">César Montevideo</h3>
+                <p class="text-xs text-cyber-neon font-mono mt-0.5">Full-Stack Engineer</p>
+                <span class="text-[11px] text-slate-400 font-mono mt-1">Guárico, Venezuela</span>
+              </div>
+            </div>
+
+            <!-- Orbiting Badges (FLOATING CHIPS - SIN PALABRA CRYPTO) -->
+            <!-- Top Left Badge -->
+            <div class="absolute -top-3 -left-4 glass-panel px-3 py-1.5 rounded-xl border border-cyber-neon/40 shadow-xl text-xs font-mono text-cyber-neon flex items-center gap-2 animate-floating">
+              <span class="w-2 h-2 rounded-full bg-cyber-neon shadow-[0_0_8px_#00ff88]"></span>
+              <span>Laravel 13 & PHP 8.4</span>
+            </div>
+
+            <!-- Bottom Left Badge -->
+            <div class="absolute -bottom-3 -left-2 glass-panel px-3 py-1.5 rounded-xl border border-emerald-500/30 shadow-xl text-xs font-mono text-white flex items-center gap-2 animate-floating-rev">
+              <span class="text-cyber-neon font-bold">⚡</span>
+              <span>Filament v5 & Livewire 4</span>
+            </div>
+
+            <!-- Top Right Badge (Pasarelas de Pago Globales) -->
+            <div class="absolute top-1/4 -right-6 glass-panel px-3 py-1.5 rounded-xl border border-cyber-neon/40 shadow-xl text-xs font-mono text-cyber-neon flex items-center gap-2 animate-floating">
+              <svg class="w-3.5 h-3.5 text-cyber-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+              <span>Stripe & Pasarelas Globales</span>
+            </div>
+
+            <!-- Bottom Right Badge (Prism AI) -->
+            <div class="absolute -bottom-4 right-4 glass-panel px-3 py-1.5 rounded-xl border border-cyan-400/30 shadow-xl text-xs font-mono text-cyan-300 flex items-center gap-2 animate-floating">
+              <span class="text-cyan-400">🤖</span>
+              <span>Prism PHP & IA</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TECHNICAL EXPERTISE (SKILLS) ================= -->
+  <section id="skills" class="py-20 border-t border-slate-800/80 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold font-mono text-cyber-neon uppercase tracking-widest">
+            <span class="w-2 h-2 rounded-full bg-cyber-neon"></span>
+            Technical Expertise
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+            Habilidades & Arquitectura Tecnológica
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-md">
+          Stack moderno seleccionado para construir plataformas web transaccionales, paneles de administración y arquitecturas escalables.
+        </p>
+      </div>
+
+      <!-- Skills Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Card 1: Core Backend & Full-Stack -->
+        <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyber-neon/50 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-cyber-neon/10 border border-cyber-neon/30 flex items-center justify-center text-cyber-neon text-xl font-bold mb-4 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,255,136,0.3)] transition-all">
+            ⚡
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyber-neon transition-colors">
+            Full-Stack Moderno & Filament
+          </h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+            Especialista en desarrollo rápido y robusto con Laravel, componentes reactivos en tiempo real y administración avanzada.
+          </p>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-cyber-neon border border-slate-800">Laravel 13</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-cyber-neon border border-slate-800">Filament PHP v5</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">Livewire 4</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">PHP 8.4</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">Tailwind CSS</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">JavaScript ES6+</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Fintech & Pasarelas -->
+        <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyber-neon/50 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-cyber-neon/10 border border-cyber-neon/30 flex items-center justify-center text-cyber-neon text-xl font-bold mb-4 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,255,136,0.3)] transition-all">
+            💳
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyber-neon transition-colors">
+            Fintech & Pasarelas de Pago
+          </h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+            Integración de procesamiento de pagos en tiempo real, suscripciones recurrentes, webhooks idempotentes y cálculo de comisiones.
+          </p>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-cyber-neon border border-slate-800">Stripe API</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-cyber-neon border border-slate-800">Coinpayments</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">PayPal & Webhooks</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">Mercado Pago</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">Árboles Binarios</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">Autenticación 2FA</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Nube, Testing & AI -->
+        <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyber-neon/50 transition-all duration-300 group">
+          <div class="w-12 h-12 rounded-xl bg-cyber-neon/10 border border-cyber-neon/30 flex items-center justify-center text-cyber-neon text-xl font-bold mb-4 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,255,136,0.3)] transition-all">
+            🤖
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyber-neon transition-colors">
+            Nube, Pruebas & IA
+          </h3>
+          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+            Despliegues en alta disponibilidad, testing automatizado para cero fallos en producción y desarrollo acelerado con inteligencia artificial.
+          </p>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-cyan-400 border border-slate-800">Prism PHP (AI)</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">Pest PHP 4</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">Laravel Pulse</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">AWS S3</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">Cloudways</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-800">MySQL & SQL Opt</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCIA PROFESIONAL ================= -->
+  <section id="experience" class="py-20 border-t border-slate-800/80 relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center mb-16">
+        <span class="text-xs font-mono font-bold text-cyber-neon uppercase tracking-widest">Trayectoria Laboral</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Experiencia en Empresas Tech</h2>
+      </div>
+
+      <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-0.5 before:bg-slate-800 before:-translate-x-1/2">
+
+        <!-- Experience 1: 789 -->
+        <div class="relative flex flex-col md:flex-row items-start group">
+          <!-- Central Dot -->
+          <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-cyber-neon border-4 border-slate-950 shadow-[0_0_12px_#00ff88] z-10"></div>
+          
+          <!-- Content Box Left -->
+          <div class="ml-10 md:ml-0 md:w-1/2 md:pr-10 text-left">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 group-hover:border-cyber-neon/40 transition-all">
+              <div class="flex items-center justify-between text-xs font-mono mb-2">
+                <span class="text-cyber-neon font-bold">Nov 2022 – Presente</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-800">Activo</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Desarrollador Full-Stack</h3>
+              <div class="text-xs text-slate-400 font-semibold mb-3">789 • Empresa especializada en plataformas financieras y sistemas web</div>
+              
+              <ul class="space-y-2 text-xs text-slate-300 leading-relaxed list-disc pl-4">
+                <li>Arquitectura y despliegue de plataformas web financieras con <strong class="text-white">Laravel 13, Filament PHP v5 y Livewire 4</strong>, optimizando flujos administrativos.</li>
+                <li>Integración de pasarelas de pago y APIs transaccionales como <strong class="text-white">Coinpayments</strong> para gestión de capital.</li>
+                <li>Gestión de infraestructura cloud en <strong class="text-white">Cloudways y AWS S3</strong>, configurando entornos multi-inquilino de alta disponibilidad.</li>
+                <li>Aceleración de desarrollo con IA (<strong class="text-white">Prism PHP</strong> y prompt engineering) para síntesis de datos y optimización de código.</li>
+                <li>Estandarización de pruebas con <strong class="text-white">Pest PHP 4 y Laravel Pulse</strong> para optimizar consultas SQL pesadas.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="hidden md:block md:w-1/2"></div>
+        </div>
+
+        <!-- Experience 2: Valdusoft -->
+        <div class="relative flex flex-col md:flex-row items-start group">
+          <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-600 border-4 border-slate-950 group-hover:bg-cyber-neon transition-colors z-10"></div>
+          
+          <div class="hidden md:block md:w-1/2"></div>
+          <!-- Content Box Right -->
+          <div class="ml-10 md:ml-0 md:w-1/2 md:pl-10 text-left">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 group-hover:border-cyber-neon/40 transition-all">
+              <div class="flex items-center justify-between text-xs font-mono mb-2">
+                <span class="text-slate-400 font-bold">Ene 2021 – Ene 2023</span>
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">2 Años</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Desarrollador Full-Stack</h3>
+              <div class="text-xs text-slate-400 font-semibold mb-3">Valdusoft • Agencia tecnológica de sistemas web complejos</div>
+              
+              <ul class="space-y-2 text-xs text-slate-300 leading-relaxed list-disc pl-4">
+                <li>Desarrollo de aplicaciones web de alto rendimiento con <strong class="text-white">Laravel, PHP, JavaScript y MySQL</strong> para plataformas de inversión.</li>
+                <li>Integración de pasarelas de pago como <strong class="text-white">Stripe, PayPal y Mercado Pago</strong> para transacciones y webhooks en vivo.</li>
+                <li>Implementación de <strong class="text-white">algoritmos de árboles binarios</strong> y estructuras jerárquicas para cálculo automatizado de comisiones y redes.</li>
+                <li>Administración de servidores y despliegues con cPanel, gestión de registros DNS y bases de datos MySQL.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROYECTOS DESTACADOS ================= -->
+  <section id="projects" class="py-20 border-t border-slate-800/80 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        <div>
+          <span class="text-xs font-mono font-bold text-cyber-neon uppercase tracking-widest">Casos de Éxito</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Proyectos & Liderazgo Técnico</h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-md">
+          Sistemas en producción diseñados con estándares rigurosos de seguridad, velocidad y confiabilidad.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Project 1 -->
+        <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-cyber-neon/50 transition-all duration-300 group">
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="text-cyber-neon">Ingeniero Full-Stack Principal</span>
+              <span class="text-slate-400">2024 – Presente</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-cyber-neon transition-colors">
+              Plataforma de Gestión Financiera y Reinversión
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Diseño de componentes reactivos y tableros interactivos con Filament PHP v5 y Livewire 4. Incluye autenticación multifactor 2FA, flujos de reinversión automatizados y generación masiva de estados de cuenta y reportes de auditoría con Barryvdh DomPDF y FastExcel.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-cyber-neon border border-slate-800">Filament v5</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">Livewire 4</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">Seguridad 2FA</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">DomPDF & FastExcel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-cyber-neon/50 transition-all duration-300 group">
+          <div class="p-6 space-y-4">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="text-cyber-neon">Infraestructura & Backend</span>
+              <span class="text-slate-400">789 Corp</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-cyber-neon transition-colors">
+              Motor de Procesamiento Transaccional & Nube Multi-Inquilino
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Sistema multi-inquilino desplegado en Cloudways y AWS S3 con balanceo de carga y certificados SSL automatizados. Integración de webhooks y procesamiento de liquidaciones en tiempo real con profiling y optimización SQL mediante Laravel Pulse.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-cyber-neon border border-slate-800">Cloudways</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">AWS S3</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">Laravel Pulse</span>
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">Pest PHP 4</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SIMULADOR DE WEBHOOK TRANSACCIONAL ================= -->
+  <section id="simulator" class="py-20 border-t border-slate-800/80 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-cyber-neon/30 neon-glow relative overflow-hidden">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div>
+            <div class="flex items-center gap-2 text-xs font-mono font-bold text-cyber-neon">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyber-neon animate-pulse"></span>
+              Live Architecture Playground
+            </div>
+            <h3 class="text-2xl font-bold text-white mt-1">Simulador de Webhook & Pasarela</h3>
+          </div>
+          <button id="sim-btn" onclick="runSimulation()" class="bg-cyber-neon hover:bg-[#00e67a] text-black font-extrabold text-xs px-5 py-2.5 rounded-xl transition-all neon-glow-btn flex items-center gap-2">
+            <span>Ejecutar Transacción Simulada</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </button>
+        </div>
+
+        <div class="mt-6 space-y-3 font-mono text-xs">
+          <div class="text-slate-400">Payload entrante (Stripe Gateway Event):</div>
+          
+          <div class="bg-black/90 p-4 rounded-xl border border-slate-800 text-slate-300 overflow-x-auto space-y-1">
+            <div id="sim-log-1" class="text-slate-500">// Presiona el botón para disparar el flujo de prueba reactivo</div>
+            <div id="sim-log-2" class="hidden text-cyber-neon">> [POST] /api/v1/webhooks/stripe-checkout.session.completed</div>
+            <div id="sim-log-3" class="hidden text-cyan-300">> Verificando firma criptográfica HMAC SHA-256... [OK]</div>
+            <div id="sim-log-4" class="hidden text-emerald-400">> Despachando Job reactivo en cola Redis: ProcessAccountSettlement [OK]</div>
+            <div id="sim-log-5" class="hidden text-white font-bold">> STATUS 200 OK — Procesado en 14ms (Filament Livewire Dashboard actualizado)</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CONTACTO ================= -->
+  <section id="contact" class="py-24 border-t border-slate-800/80 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      
+      <span class="text-xs font-mono font-bold text-cyber-neon uppercase tracking-widest">¿Tienes un proyecto o vacante?</span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-3">
+        Construyamos Algo Excepcional
+      </h2>
+      <p class="text-sm text-slate-300 mt-4 max-w-xl mx-auto leading-relaxed">
+        Estoy disponible para posiciones de tiempo completo o consultoría técnica remota. Hablemos sobre cómo puedo aportar a tu equipo de ingeniería.
+      </p>
+
+      <!-- Contact Buttons Grid -->
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <a href="mailto:monevideocesar599@gmail.com" class="glass-panel p-5 rounded-2xl border border-slate-800 hover:border-cyber-neon/50 transition-all flex flex-col items-center justify-center group">
+          <div class="w-10 h-10 rounded-full bg-cyber-neon/10 text-cyber-neon flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition">
+            ✉
+          </div>
+          <span class="text-xs font-bold text-white">Email Directo</span>
+          <span class="text-[11px] text-slate-400 font-mono mt-1">monevideocesar599@gmail.com</span>
+        </a>
+
+        <a href="https://wa.me/584243561272" target="_blank" class="glass-panel p-5 rounded-2xl border border-slate-800 hover:border-cyber-neon/50 transition-all flex flex-col items-center justify-center group">
+          <div class="w-10 h-10 rounded-full bg-cyber-neon/10 text-cyber-neon flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition">
+            💬
+          </div>
+          <span class="text-xs font-bold text-white">WhatsApp / Teléfono</span>
+          <span class="text-[11px] text-slate-400 font-mono mt-1">+58 424-3561272</span>
+        </a>
+
+        <a href="https://linkedin.com/in/cesar-montevideo-619456204" target="_blank" class="glass-panel p-5 rounded-2xl border border-slate-800 hover:border-cyber-neon/50 transition-all flex flex-col items-center justify-center group">
+          <div class="w-10 h-10 rounded-full bg-cyber-neon/10 text-cyber-neon flex items-center justify-center text-lg mb-2 group-hover:scale-110 transition">
+            in
+          </div>
+          <span class="text-xs font-bold text-white">LinkedIn</span>
+          <span class="text-[11px] text-slate-400 font-mono mt-1">cesar-montevideo</span>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-8 border-t border-slate-900 bg-black/60 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 font-mono">
+        <span class="w-2 h-2 rounded-full bg-cyber-neon"></span>
+        <span class="text-slate-400">César Enrique Montevideo Domínguez</span>
+      </div>
+      <div>
+        Diseñado con Laravel Stack Mindset & Cyber Glow • 100% Remoto
+      </div>
+      <a href="#hero" class="text-cyber-neon hover:underline font-mono">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <!-- Simulation JavaScript -->
+  <script>
+    function runSimulation() {
+      const btn = document.getElementById('sim-btn');
+      const log1 = document.getElementById('sim-log-1');
+      const log2 = document.getElementById('sim-log-2');
+      const log3 = document.getElementById('sim-log-3');
+      const log4 = document.getElementById('sim-log-4');
+      const log5 = document.getElementById('sim-log-5');
+
+      btn.disabled = true;
+      btn.classList.add('opacity-50');
+      btn.innerText = 'Procesando...';
+
+      log1.classList.add('hidden');
+      log2.classList.remove('hidden');
+      log3.classList.add('hidden');
+      log4.classList.add('hidden');
+      log5.classList.add('hidden');
+
+      setTimeout(() => { log3.classList.remove('hidden'); }, 300);
+      setTimeout(() => { log4.classList.remove('hidden'); }, 600);
+      setTimeout(() => { 
+        log5.classList.remove('hidden');
+        btn.disabled = false;
+        btn.classList.remove('opacity-50');
+        btn.innerText = '✓ Ejecutar Nuevamente';
+      }, 900);
+    }
+  </script>
+
+</body>
+</html>
