@@ -2,6 +2,8 @@
 
 > Full-Stack Developer & Fintech Architect especializado en Laravel 13, Filament v5, Livewire 4, Pasarelas de Pago e IA.
 
+🌐 **Sitio Web en Vivo:** [https://portafolio-1-b6vq.onrender.com/](https://portafolio-1-b6vq.onrender.com/)
+
 ---
 
 ## 🚀 Opciones de Despliegue en Render
