@@ -7,8 +7,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const APP_URL = process.env.APP_URL; // Ejemplo: https://tu-portafolio.onrender.com
 
+// Middleware para evitar que el navegador guarde en caché HTML viejo
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  res.set('Surrogate-Control', 'no-store');
+  next();
+});
+
 // Servir archivos estáticos (HTML, CSS, JS, imágenes)
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname), { etag: false, maxAge: 0 }));
 
 // Endpoint de salud / ping
 app.get('/health', (req, res) => {
